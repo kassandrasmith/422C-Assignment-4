@@ -13,7 +13,7 @@ public class Assign4Driver
     {
         // Create a word ladder solver object
         Assignment4Interface wordLadderSolver = new WordLadderSolver();
-
+        //todo add to end of printed line System.out.println("*********");
         try 
         {
             List<String> result = wordLadderSolver.computeLadder("money", "honey");
