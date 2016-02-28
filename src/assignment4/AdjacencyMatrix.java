@@ -3,9 +3,11 @@ package assignment4;
 
 import sun.security.provider.certpath.AdjacencyList;
 
+import java.util.HashMap;
+
 public class AdjacencyMatrix {
 
-    int index; //fixme should be zero??
+    int index;
     boolean[][] array;
 
     AdjacencyMatrix(int first) {
@@ -13,9 +15,19 @@ public class AdjacencyMatrix {
         array = new boolean[index][index];
     }
 
+    AdjacencyMatrix(HashMap dictionary, String start, String end){
+
+    }
+
+    public class Node {
+        private Node[] adjacentNodes;
+        public Node(Node[] nodes) { adjacentNodes = nodes; }
+        public Node[] adjacentNodes() { return adjacentNodes; }
+    }
+
 
     /*todo method headers*/
-    void addEdge(int i, int j) {
+    void setEdge(int i, int j) {
         array[i][j] = true;
     }
     /**/
