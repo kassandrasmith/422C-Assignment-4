@@ -7,13 +7,19 @@ import java.util.HashMap;
 
 public class AdjacencyMatrix {
 
-    int index;
-    boolean[][] array;
+    int index; //fixme public? private?
+    private int vertices;
+    private int edges;
+    private boolean[][] array;
+    private int numberOfNodes = 5757;//number of words in the dictionary
 
-    AdjacencyMatrix(int first) {
-        index = first;
-        array = new boolean[index][index];
+    AdjacencyMatrix(int Vertices) {
+        vertices = Vertices;
+        edges = 0;
+        array = new boolean[vertices][vertices];
     }
+
+
 
     AdjacencyMatrix(HashMap dictionary, String start, String end){
 
@@ -30,6 +36,15 @@ public class AdjacencyMatrix {
     void setEdge(int i, int j) {
         array[i][j] = true;
     }
+
+    public int getEdges(){
+        return edges;
+    }
+
+    public int getVertices(){
+        return vertices;
+    }
+
     /**/
     void removeEdge(int i, int j) {
         array[i][j] = false;
@@ -43,5 +58,6 @@ public class AdjacencyMatrix {
     int getNumVertices(AdjacencyMatrix adjmat){
         return array.length;
     }
+
 
 }
