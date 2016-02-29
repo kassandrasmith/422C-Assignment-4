@@ -4,6 +4,7 @@ package assignment4;
 import sun.security.provider.certpath.AdjacencyList;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class AdjacencyMatrix {
 
@@ -11,6 +12,7 @@ public class AdjacencyMatrix {
     private int vertices;
     private int edges;
     private boolean[][] array;
+    private static String alphabet = "abcdefghijklmnopqrstuvwxyz";
     private int numberOfNodes = 5757;//number of words in the dictionary
 
     AdjacencyMatrix(int Vertices) {
@@ -22,7 +24,28 @@ public class AdjacencyMatrix {
 
 
     AdjacencyMatrix(HashMap dictionary, String start, String end){
+        vertices = dictionary.size();
+        array = new boolean[vertices][vertices];
 
+        array = createEdges(dictionary, start, end, 0);
+
+
+    }
+
+    private boolean[][] createEdges(HashMap dictionary, String startWord, String endWord, int n) {
+        String checkword = startWord;
+        int k = 0;
+        for (int j = n; j < 5; j++) {
+            int p = (j + 1);
+            for (int i = 0; i < alphabet.length(); i++) {
+                checkword = startWord.substring(0, j) + alphabet.charAt(i) + startWord.substring(p, 5);
+                if (dictionary.containsKey(checkword) && (!Objects.equals(checkword, startWord))) {
+                array[k][i] = true; //todo hash code correct?
+                }
+                else array[k][i] = false;
+            }
+        }
+return array;
     }
 
     public class Node {

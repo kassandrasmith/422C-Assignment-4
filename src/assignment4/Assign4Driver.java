@@ -15,8 +15,12 @@ public class Assign4Driver
         Assignment4Interface wordLadderSolver = new WordLadderSolver();
         try 
         {
-            List<String> result = wordLadderSolver.computeLadder("money", "honey");
-            boolean correct = wordLadderSolver.validateResult("money", "honey", result);
+            List<String> result = wordLadderSolver.computeLadder("stone", "money");
+
+            System.out.println(result); //todo formatting
+
+            //todo add back in
+            // boolean correct = wordLadderSolver.validateResult("money", "honey", result);
         }
         //todo add to end of printed line System.out.println("*********");
         catch (NoSuchLadderException e) 
