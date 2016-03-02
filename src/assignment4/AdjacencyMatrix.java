@@ -4,6 +4,7 @@ package assignment4;
 import sun.security.provider.certpath.AdjacencyList;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class AdjacencyMatrix {
@@ -34,6 +35,10 @@ public class AdjacencyMatrix {
 
     private boolean[][] createEdges(HashMap dictionary, String startWord, String endWord, int n) {
         String checkword = startWord;
+        Iterator it = dictionary.entrySet().iterator();
+        while (it.hasNext()){
+            
+        }
         int k = 0;
         for (int j = n; j < 5; j++) {
             int p = (j + 1);
