@@ -3,74 +3,48 @@ package assignment4;
 
 import sun.security.provider.certpath.AdjacencyList;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Objects;
+import java.util.*;
 
 public class AdjacencyMatrix {
 
     int index; //fixme public? private?
-    private int vertices;
+    private int numVertices;
     private int edges;
     private boolean[][] array;
     private static String alphabet = "abcdefghijklmnopqrstuvwxyz";
     private int numberOfNodes = 5757;//number of words in the dictionary
 
-    AdjacencyMatrix(int Vertices) {
-        vertices = Vertices;
-        edges = 0;
-        array = new boolean[vertices][vertices];
+    AdjacencyMatrix(Set<String> dictionary) {
+        numVertices = dictionary.size();
+        array = createEdges(dictionary);
     }
 
-
-
-    AdjacencyMatrix(HashMap dictionary, String start, String end){
-        vertices = dictionary.size();
-        array = new boolean[vertices][vertices];
-
-        array = createEdges(dictionary, start, end, 0);
-
-
-    }
-
-    private boolean[][] createEdges(HashMap dictionary, String startWord, String endWord, int n) {
-        String checkword = startWord;
-        Iterator it = dictionary.entrySet().iterator();
-        while (it.hasNext()){
-            
-        }
-        int k = 0;
-        for (int j = n; j < 5; j++) {
-            int p = (j + 1);
-            for (int i = 0; i < alphabet.length(); i++) {
-                checkword = startWord.substring(0, j) + alphabet.charAt(i) + startWord.substring(p, 5);
-                if (dictionary.containsKey(checkword) && (!Objects.equals(checkword, startWord))) {
-                array[k][i] = true; //todo hash code correct?
-                }
-                else array[k][i] = false;
+    private boolean[][] createEdges(Set<String> dictionary) {
+        int row = 0;
+        int column = 0;
+        array = new boolean[numVertices][numVertices];
+        for (String rowWord : dictionary) {
+            for (String columnWord : dictionary) {
+                array[row][column] = isOneAway(rowWord, columnWord);
+                column++;
             }
+            column = 0;
+            row++;
         }
-return array;
+        return array;
     }
-
-    public class Node {
-        private Node[] adjacentNodes;
-        public Node(Node[] nodes) { adjacentNodes = nodes; }
-        public Node[] adjacentNodes() { return adjacentNodes; }
-    }
-
 
     /*todo method headers*/
     void setEdge(int i, int j) {
         array[i][j] = true;
     }
 
-    public int getEdges(){
+    public int getEdges() {
         return edges;
     }
 
-    public int getVertices(){
-        return vertices;
+    public int getVertices() {
+        return numVertices;
     }
 
     /**/
@@ -83,8 +57,18 @@ return array;
         return array[i][j];
     }
 
-    int getNumVertices(AdjacencyMatrix adjmat){
+    int getNumVertices(AdjacencyMatrix adjmat) {
         return array.length;
+    }
+
+    public boolean isOneAway(String first, String second) {
+        int counter = 0;
+        for (int j = 0; j < 5; j++) {
+            if (first.charAt(j) == second.charAt(j)) {
+                counter++;
+            }
+        }
+        return counter == 4;
     }
 
 

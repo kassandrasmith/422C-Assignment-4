@@ -17,18 +17,16 @@ import java.util.*;
 // do not change class name or interface it implements
 public class WordLadderSolver implements Assignment4Interface {
     // declare class members here.
-    private static String alphabet = "abcdefghijklmnopqrstuvwxyz";
-    public static String dictRegex = "[//d+*,]";
-    static Dictionary dictionary;
-
+    private final static String alphabet = "abcdefghijklmnopqrstuvwxyz";
+    public final static String dictRegex = "[//d+*,]";
+    private Dictionary dictionary;
     ArrayList<String> ladder = new ArrayList<String>();
 
     // add a constructor for this object. HINT: it would be a good idea to set up the dictionary there
-    public WordLadderSolver() {
+    public WordLadderSolver(Dictionary dictionary) {
+        this.dictionary = dictionary;
         //todo don't think the reading works
-        InputStream input = getClass().getResourceAsStream("A4-words.txt");
-        String[] args = {"A4-words.txt"};
-        HashMap dictionary = new Dictionary(args).dictionary;
+
     }
 
     // do not change signature of the method implemented from the interface
@@ -43,8 +41,9 @@ public class WordLadderSolver implements Assignment4Interface {
             ladder.add(1, endWord);
             return ladder;
         }
-        //    AdjacencyMatrix wordGraph = new AdjacencyMatrix(dictionary, startWord, endWord);
-        //    DepthFirstSearch newLadder = new DepthFirstSearch(wordGraph, 0);
+
+            AdjacencyMatrix wordGraph = new AdjacencyMatrix(dictionary.getWordSet());
+            DepthFirstSearch newLadder = new DepthFirstSearch(wordGraph, 0);
 
         makeLadder(startWord, endWord, 0);
         makeLadder(startWord, endWord, 1);
@@ -60,24 +59,18 @@ public class WordLadderSolver implements Assignment4Interface {
 
 
     private boolean areBothWords(String startWord, String endWord) {
-            return dictionary.dictionary.containsKey(startWord) && dictionary.dictionary.containsKey(endWord);
+            return dictionary.contains(startWord) && dictionary.contains(endWord);
     }
 
-    private boolean isOneAway(String startWord, String endWord) {
-        String checkword = startWord;
-          for (int i = 0; i < alphabet.length(); i++) {
+    public boolean isOneAway(String first, String second) {
+        int counter = 0;
         for (int j = 0; j < 5; j++) {
-            int p = j + 1;
-                   checkword = startWord.substring(0, j) + alphabet.charAt(i) + startWord.substring(p, 5);
-            if (checkword.equals(endWord)) {
-                return true;
+            if (first.charAt(j) == second.charAt(j)) {
+                counter++;
             }
         }
-
-            }
-
-            return false;
-        }
+        return counter == 4;
+    }
 
     @Override
     public boolean validateResult(String startWord, String endWord, List<String> wordLadder) {
