@@ -8,10 +8,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class DepthFirstSearch {
-
-
-
-
     private boolean[] visited;
     private int count;
     private static String alphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -23,15 +19,16 @@ public class DepthFirstSearch {
         dfs(startWord,endWord, dictionary, ladder, 0);
     }
 
-
-
     //s is source vertex
     public DepthFirstSearch(AdjacencyMatrix graph, int s){
         visited = new boolean[graph.getNumVertices(graph)];
         dfs(graph, s);
     }
 
-    private boolean dfs(String startWord, String endWord, HashMap dictionary, List ladder, int n){
+
+
+
+    public boolean dfs(String startWord, String endWord, HashMap dictionary, List ladder, int n){
         String checkword = startWord;
         if (checkword.equals(endWord)) {
             ladder.add(checkword);
@@ -51,7 +48,7 @@ public class DepthFirstSearch {
         return false;
     }
 
-    private void dfs(AdjacencyMatrix graph, int v){
+    public void dfs(AdjacencyMatrix graph, int v){
         count++;
         visited[v] = true;
         //todo print the node

@@ -10,6 +10,7 @@ public class AdjacencyMatrix {
     int index; //fixme public? private?
     private int numVertices;
     private int edges;
+    private boolean[] visited;
     private boolean[][] array;
     private static String alphabet = "abcdefghijklmnopqrstuvwxyz";
     private int numberOfNodes = 5757;//number of words in the dictionary
@@ -34,6 +35,43 @@ public class AdjacencyMatrix {
         return array;
     }
 
+    public boolean isOneAway(String first, String second) {
+        int counter = 0;
+        for (int j = 0; j < 5; j++) {
+            if (first.charAt(j) == second.charAt(j)) {
+                counter++;
+            }
+        }
+        return counter == 4;
+    }
+
+
+    public List<Integer> dfs(int startWordIndex, int endWordIndex) {
+
+        boolean[] adjacencyList = array[startWordIndex];
+        visited[startWordIndex] = true;
+
+        if (startWordIndex == endWordIndex) {
+            List<Integer> ladder = new LinkedList<>();
+            return ladder;
+        }
+        for (int i = 0; i < adjacencyList.length; i++) {
+            if (adjacencyList[i] && !visited[i]) {
+                List<Integer>ladder = dfs(i, endWordIndex);
+                if(ladder != null) {
+                     ladder.add(i);
+                    return ladder;
+                }
+
+            }
+        }
+        return null;
+    }
+
+    int getNumVertices(AdjacencyMatrix adjmat) {
+        return array.length;
+    }
+
     /*todo method headers*/
     void setEdge(int i, int j) {
         array[i][j] = true;
@@ -55,20 +93,6 @@ public class AdjacencyMatrix {
     /**/
     boolean hasEdge(int i, int j) {
         return array[i][j];
-    }
-
-    int getNumVertices(AdjacencyMatrix adjmat) {
-        return array.length;
-    }
-
-    public boolean isOneAway(String first, String second) {
-        int counter = 0;
-        for (int j = 0; j < 5; j++) {
-            if (first.charAt(j) == second.charAt(j)) {
-                counter++;
-            }
-        }
-        return counter == 4;
     }
 
 

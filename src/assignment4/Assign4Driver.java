@@ -55,7 +55,8 @@ public class Assign4Driver {
             e.printStackTrace();
             System.exit(-1);
         }
-        return (String[]) array.toArray(); //potential fixme
+        String[] newArray = new String[0];
+        return array.toArray(newArray);
     }
 }
 
