@@ -81,7 +81,8 @@ public class AdjacencyMatrix {
             ladder.add(parents[g]);
             g = parents[g];
         }
-
+        q.clear();
+        Arrays.fill(visited, false);
         return ladder;
     }
 
