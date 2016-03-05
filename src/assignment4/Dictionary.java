@@ -1,5 +1,5 @@
 /*
-    Word Ladder Assignment
+    Dictionary class for the Word Ladder Assignment
     Team # 33:
     SMITH, KASSANDRA kss2474 (16180)
     HADIMOHD, AFTAB ah35368 (16180)

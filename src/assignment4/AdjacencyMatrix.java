@@ -1,7 +1,10 @@
+/*
+    Adjacency Matrix Class for the Word Ladder Assignment
+    Team # 33:
+    SMITH, KASSANDRA kss2474 (16180)
+    HADIMOHD, AFTAB ah35368 (16180)
+ */
 package assignment4;
-
-
-import sun.security.provider.certpath.AdjacencyList;
 
 import java.util.*;
 
@@ -51,7 +54,7 @@ public class AdjacencyMatrix {
     public List<Integer> bfs(int startWordIndex, int endWordIndex) {
         List<Integer> ladder = new LinkedList<>();
         Queue<Integer> q = new LinkedList<>();
-        boolean[] adjList = new boolean[0];
+        boolean[] adjList;
         parents = new int[numberOfNodes];
         Arrays.fill(parents, -1);
         q.add(startWordIndex);
@@ -74,9 +77,9 @@ public class AdjacencyMatrix {
         }
         int g = endWordIndex;
         ladder.add(g);
-        while (parents[g]!=-1)
-        {ladder.add(parents[g]);
-            g=parents[g];
+        while (parents[g] != -1) {
+            ladder.add(parents[g]);
+            g = parents[g];
         }
 
         return ladder;

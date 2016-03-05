@@ -1,11 +1,12 @@
 /*
-    Word Ladder Assignment
+    Solver for the Word Ladder Assignment
     Team # 33:
     SMITH, KASSANDRA kss2474 (16180)
     HADIMOHD, AFTAB ah35368 (16180)
  */
 
 package assignment4;
+
 import java.util.*;
 
 // do not change class name or interface it implements
@@ -63,8 +64,6 @@ public class WordLadderSolver implements Assignment4Interface {
     public boolean validateResult() {
         throw new UnsupportedOperationException("Not implemented yet!");
     }
-
-
     // add additional methods here
 
 

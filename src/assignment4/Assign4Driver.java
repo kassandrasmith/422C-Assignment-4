@@ -5,6 +5,7 @@
     HADIMOHD, AFTAB ah35368 (16180)
  */
 package assignment4;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,16 +24,14 @@ public class Assign4Driver {
         try {
             List<String> result = wordLadderSolver.computeLadder("mangy", "money");
             //todo read from args[1]
-            for (String o:
-                 result) {
-                System.out.println(o +"\n");
+            for (String o :
+                    result) {
+                System.out.println(o + "\n");
             }
-             //todo formatting
             System.out.println("*********");
             //todo add back in
             // boolean correct = wordLadderSolver.validateResult("money", "honey", result);
-        }
-        catch (NoSuchLadderException e) {
+        } catch (NoSuchLadderException e) {
             e.printStackTrace();
         }
     }
