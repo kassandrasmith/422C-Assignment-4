@@ -11,24 +11,49 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Assign4Driver {
+
+    /*
+    METHOD: main
+    PURPOSE: driver
+    PARAMS: @param command line arguments
+    RETURNS: NONE
+    */
     public static void main(String[] args) {
-        if (args.length != 1) {
+        if (args.length != 1 && args.length != 2) {
             System.err.println("Error: Incorrect number of command line arguments");
             System.exit(-1);
         }
 
-        String[] dictionaryStrings = fromFile(args[0]);
+        String[] dictionaryStrings = fromDictFile(args[0]);
         Dictionary dictionary = new Dictionary(dictionaryStrings);
         // Create a word ladder solver object
         Assignment4Interface wordLadderSolver = new WordLadderSolver(dictionary);
         try {
-            List<String> result = wordLadderSolver.computeLadder("mangy", "money");
-            //todo read from args[1]
-            for (String o :
-                    result) {
-                System.out.println(o + "\n");
+
+           /*UNCOMMENT THESE LINES TO INPUT FROM A COMMAND LINE FILE*/
+            /*START*/
+            String[] inputStrings = fromWordsFile(args[1]);
+            for (String pair: inputStrings
+                 ) {
+                String[] checkPair = pair.split("[\\s]");
+                List<String> result = wordLadderSolver.computeLadder(checkPair[0], checkPair[1]);
+                for (String o :
+                        result) {
+                    System.out.println(o + "\n");
+                }
+                System.out.println("*********");
+                result.clear();
             }
-            System.out.println("*********");
+            /*END*/
+            /*COMMENT THESE LINES OUT TO INPUT FROM A COMMAND LINE FILE*/
+//            /*START*/
+//            List<String> result = wordLadderSolver.computeLadder("atlas", "zebra");
+//            for (String o :
+//                    result) {
+//                System.out.println(o + "\n");
+//            }
+//            System.out.println("*********");
+            /*END*/
             //todo add back in
             // boolean correct = wordLadderSolver.validateResult("money", "honey", result);
         } catch (NoSuchLadderException e) {
@@ -36,7 +61,13 @@ public class Assign4Driver {
         }
     }
 
-    private static String[] fromFile(String filename) {
+    /*
+    METHOD: fromDictFile
+    PURPOSE: file reading
+    PARAMS: @param the name of the file as a string
+    RETURNS: array of strings containing lines from the file
+    */
+    private static String[] fromDictFile(String filename) {
 
         List<String> array = new ArrayList<>();
 
@@ -49,6 +80,37 @@ public class Assign4Driver {
                     s = s.substring(0, 5);
                     array.add(s);
                 }
+            }
+            // close reader
+            reader.close();
+        } catch (FileNotFoundException e) {
+            System.err.println("Error: File not found. Exiting...");
+            e.printStackTrace();
+            System.exit(-1);
+        } catch (IOException e) {
+            System.err.println("Error: IO exception. Exiting...");
+            e.printStackTrace();
+            System.exit(-1);
+        }
+        String[] newArray = new String[0];
+        return array.toArray(newArray);
+    }
+    /*
+    METHOD: fromWordsFile
+    PURPOSE: file reading
+    PARAMS: @param the name of the input words file as a string
+    RETURNS: array of strings pairs separated with comma
+    */
+    private static String[] fromWordsFile(String filename) {
+
+        List<String> array = new ArrayList<>();
+
+        // open reader
+        try {
+            FileReader freader = new FileReader(filename);
+            BufferedReader reader = new BufferedReader(freader);
+            for (String s = reader.readLine(); s != null; s = reader.readLine()) {
+                    array.add(s);
             }
             // close reader
             reader.close();
