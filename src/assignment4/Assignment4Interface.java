@@ -29,10 +29,7 @@ public interface Assignment4Interface
      * you return in the above method is correct.
      * For a word ladder to be valid the 0th index must be startWord, the endWord must be in the last index position,
      * and all intermediate words need to be exactly one distance apart.
-     * @param startWord The starting word in the word ladder.
-     * @param endWord The ending word in the word ladder.
-     * @param wordLadder The wordLadder to check if the solution is valid
      * @return True if the word ladder is correct, false otherwise.
      */
-    boolean validateResult(String startWord, String endWord, List<String> wordLadder);
+    boolean validateResult();
 }

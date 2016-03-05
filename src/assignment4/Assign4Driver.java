@@ -1,9 +1,13 @@
+/*
+    Driver for the Word Ladder Assignment (Assignment 4)
+    Team # 33:
+    SMITH, KASSANDRA kss2474 (16180)
+    HADIMOHD, AFTAB ah35368 (16180)
+ */
 package assignment4;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class Assign4Driver {
     public static void main(String[] args) {
@@ -17,20 +21,23 @@ public class Assign4Driver {
         // Create a word ladder solver object
         Assignment4Interface wordLadderSolver = new WordLadderSolver(dictionary);
         try {
-            List<String> result = wordLadderSolver.computeLadder("stone", "money");
-
-            System.out.println(result); //todo formatting
-
+            List<String> result = wordLadderSolver.computeLadder("mangy", "money");
+            //todo read from args[1]
+            for (String o:
+                 result) {
+                System.out.println(o +"\n");
+            }
+             //todo formatting
+            System.out.println("*********");
             //todo add back in
             // boolean correct = wordLadderSolver.validateResult("money", "honey", result);
         }
-        //todo add to end of printed line System.out.println("*********");
         catch (NoSuchLadderException e) {
             e.printStackTrace();
         }
     }
 
-    public static String[] fromFile(String filename) {
+    private static String[] fromFile(String filename) {
 
         List<String> array = new ArrayList<>();
 
