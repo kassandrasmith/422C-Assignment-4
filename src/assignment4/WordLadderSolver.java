@@ -15,41 +15,70 @@ public class WordLadderSolver implements Assignment4Interface {
     private final Dictionary dictionary;
     private final ArrayList<String> ladder = new ArrayList<>();
     private List<Integer> finalLadder = new LinkedList<>();
-
-    // add a constructor for this object. HINT: it would be a good idea to set up the dictionary there
     public WordLadderSolver(Dictionary dictionary) {
         this.dictionary = dictionary;
     }
-
     // do not change signature of the method implemented from the interface
+    /*
+    METHOD:     computeLadder
+    PURPOSE:    creates a ladder
+    PARAMS:     @param the start word of the ladder
+                @param the end word of the ladder
+    RETURNS:    A list that contains the words in the ladder between the start and end word
+    */
     @Override
     public List<String> computeLadder(String startWord, String endWord) throws NoSuchLadderException {
+        finalLadder.clear();
+
+        if(startWord.length()!=5 | endWord.length()!=5){
+            System.out.println("Error : Both words must be 5 letters long.");
+            return ladder;
+
+        }
+
+        //check to see if the pair is the same word
+        if(startWord.equals(endWord)){
+            ladder.add(0, startWord);
+            return ladder;
+        }
+        //check whether or not the pair is already a ladder
         if (isOneAway(startWord, endWord)) {
             ladder.add(0, startWord);
             ladder.add(1, endWord);
             return ladder;
         }
+        //create an adjacency matrix
         AdjacencyMatrix wordGraph = new AdjacencyMatrix(dictionary.getWordSet());
-        //DepthFirstSearch newLadder = new DepthFirstSearch(wordGraph, 0);
         if (dictionary.wordToIndex(startWord) == -1 || dictionary.wordToIndex(endWord) == -1) {
             System.out.println("not a real word");
         } else {
             finalLadder = wordGraph.bfs(dictionary.wordToIndex(startWord), dictionary.wordToIndex(endWord));
         }
-        if (finalLadder == null) {
-            throw new NoSuchLadderException("No ladder exists between these two words");
+       try{
+           if (finalLadder == null | finalLadder.size() ==1) {
+               throw new NoSuchLadderException("No ladder exists between these two words");
         } else {
             for (Integer o : finalLadder) {
                 ladder.add(dictionary.indexToWord(o));
             }
-            ladder.add(startWord);
         }
+       } catch (NoSuchLadderException e){
+           System.out.println("No ladder exists between these two words");
+       }
+
         Collections.reverse(ladder); //put start word first and end word last
         return ladder;
+
         //throw new UnsupportedOperationException("Not implemented yet!");
     }
 
-
+    /*
+    METHOD:     isOneAway
+    PURPOSE:    checks to see if two Strings are different by one letter
+    PARAMS:     @param the first word (String)
+                @param the word to be checked against (String)
+    RETURNS:    A true or false depending on whether or not the words are one away
+    */
     private boolean isOneAway(String first, String second) {
         int counter = 0;
         for (int j = 0; j < 5; j++) {
@@ -62,7 +91,8 @@ public class WordLadderSolver implements Assignment4Interface {
 
     @Override
     public boolean validateResult() {
-        throw new UnsupportedOperationException("Not implemented yet!");
+
+            throw new UnsupportedOperationException("Not implemented yet!");
     }
     // add additional methods here
 
