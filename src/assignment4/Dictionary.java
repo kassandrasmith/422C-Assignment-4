@@ -13,16 +13,24 @@ import java.util.*;
 
 public class Dictionary {
     private final Set<String> dictionary = new TreeSet<>();
-
-
+    /*
+    METHOD:     Dictionary Constructor
+    PURPOSE:    constructor for the dictionary
+    PARAMS:     @param args the String array containing the names of files set as command line arguments
+    RETURNS:    NONE but it does construct a Dictionary
+    */
     public Dictionary(String[] args) {
         Collections.addAll(dictionary, args);
     }
 
-    public Set<String> getWordSet() {
-        return dictionary;
-    }
 
+
+    /*
+    * METHOD:     Dictionary Constructor
+    * PURPOSE:    constructor for the dictionary
+    * PARAMS:     @param word the String array containing the names of files set as command line arguments
+    * RETURNS:    NONE but it does construct a Dictionary
+    */
     public int wordToIndex(String word) {
         int index = -1;
         for (String o : dictionary) {
@@ -34,6 +42,12 @@ public class Dictionary {
         return -1;
     }
 
+    /*
+    METHOD:     index to Word
+    PURPOSE:    gets the word at a given index from the dictionary
+    PARAMS:     @param index the integer index into the dictionary
+    RETURNS:    the string that is at the index location in the dictionary
+    */
     public String indexToWord(int index) {
         int counter = -1;
         for (String o : dictionary) {
@@ -43,5 +57,15 @@ public class Dictionary {
             }
         }
         return null;
+    }
+
+    /*
+    METHOD:     getWordSet
+    PURPOSE:    getter for the dictionary
+    PARAMS:     NONE
+    RETURNS:    the Set that is the dictionary
+    */
+    public Set<String> getWordSet() {
+        return dictionary;
     }
 }

@@ -15,10 +15,12 @@ public class WordLadderSolver implements Assignment4Interface {
     private final Dictionary dictionary;
     private final ArrayList<String> ladder = new ArrayList<>();
     private List<Integer> finalLadder = new LinkedList<>();
+
     public WordLadderSolver(Dictionary dictionary) {
         this.dictionary = dictionary;
     }
     // do not change signature of the method implemented from the interface
+
     /*
     METHOD:     computeLadder
     PURPOSE:    creates a ladder
@@ -30,14 +32,14 @@ public class WordLadderSolver implements Assignment4Interface {
     public List<String> computeLadder(String startWord, String endWord) throws NoSuchLadderException {
         finalLadder.clear();
 
-        if(startWord.length()!=5 | endWord.length()!=5){
+        if (startWord.length() != 5 | endWord.length() != 5) {
             System.out.println("Error : Both words must be 5 letters long.");
             return ladder;
 
         }
 
         //check to see if the pair is the same word
-        if(startWord.equals(endWord)){
+        if (startWord.equals(endWord)) {
             ladder.add(0, startWord);
             return ladder;
         }
@@ -54,17 +56,17 @@ public class WordLadderSolver implements Assignment4Interface {
         } else {
             finalLadder = wordGraph.bfs(dictionary.wordToIndex(startWord), dictionary.wordToIndex(endWord));
         }
-       try{
-           if (finalLadder == null | finalLadder.size() ==1) {
-               throw new NoSuchLadderException("No ladder exists between these two words");
-        } else {
-            for (Integer o : finalLadder) {
-                ladder.add(dictionary.indexToWord(o));
+        try {
+            if (finalLadder == null | finalLadder.size() == 1) {
+                throw new NoSuchLadderException("No ladder exists between these two words");
+            } else {
+                for (Integer o : finalLadder) {
+                    ladder.add(dictionary.indexToWord(o));
+                }
             }
+        } catch (NoSuchLadderException e) {
+            System.out.println("No ladder exists between these two words");
         }
-       } catch (NoSuchLadderException e){
-           System.out.println("No ladder exists between these two words");
-       }
 
         Collections.reverse(ladder); //put start word first and end word last
         return ladder;
@@ -90,9 +92,15 @@ public class WordLadderSolver implements Assignment4Interface {
     }
 
     @Override
-    public boolean validateResult() {
-
-            throw new UnsupportedOperationException("Not implemented yet!");
+    public boolean validateResult(String startWord, String endWord, List<String> wordLadder) {
+        String prevWord = startWord;
+        for (String aWordLadder : wordLadder) {
+            if (!isOneAway(prevWord, aWordLadder) && !startWord.equals(wordLadder.get(0))) {
+                return false;
+            }
+            prevWord = aWordLadder;
+        }
+        return true;
     }
     // add additional methods here
 

@@ -31,5 +31,5 @@ public interface Assignment4Interface
      * and all intermediate words need to be exactly one distance apart.
      * @return True if the word ladder is correct, false otherwise.
      */
-    boolean validateResult();
+    boolean validateResult(String startWord, String endWord, List<String> wordLadder);
 }

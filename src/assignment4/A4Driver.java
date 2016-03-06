@@ -42,6 +42,8 @@ public class A4Driver {
                     System.out.println(o + "\n");
                 }
                 System.out.println("*********");
+                boolean correct = wordLadderSolver.validateResult(checkPair[0], checkPair[1], result);
+                if(!correct){System.out.println("HELP MEEEE");}
                 result.clear();
             }
             /*END*/
@@ -53,9 +55,10 @@ public class A4Driver {
 //                System.out.println(o + "\n");
 //            }
 //            System.out.println("*********");
+//            boolean correct = wordLadderSolver.validateResult("money", "honey", result);
             /*END*/
-            //todo add back in
-            // boolean correct = wordLadderSolver.validateResult("money", "honey", result);
+
+//             boolean correct = wordLadderSolver.validateResult("money", "honey", result);
         } catch (NoSuchLadderException e) {
             e.printStackTrace();
         }
