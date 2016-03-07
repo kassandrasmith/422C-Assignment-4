@@ -10,7 +10,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class A4Driver {
+public class Assign4Driver {
 
     /*
     METHOD: main

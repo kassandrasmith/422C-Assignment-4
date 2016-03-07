@@ -28,7 +28,7 @@ public class AdjacencyMatrixTest {
         int whilew = dictionary.wordToIndex("while");
         List<Integer> testAgainst = new LinkedList<>();
         for (String word: testDictionary) {
-            boolean add = testAgainst.add(dictionary.wordToIndex(word));
+           testAgainst.add(dictionary.wordToIndex(word));
         }
         List<Integer> testingList = wordGraph.bfs(stone, whilew);
         assert (wordGraph.getNumVertices() == 7);
