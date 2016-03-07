@@ -47,10 +47,10 @@ public class DictionaryTest {
     }
 
     @Test
-        public void testGetWordSet() throws Exception {
+    public void testGetWordSet() throws Exception {
         Dictionary dictionary = new Dictionary(smallDict);
         Set dictSet = dictionary.getWordSet();
-        assert(dictSet.size() == 7);
+        assert (dictSet.size() == 7);
 
     }
 }

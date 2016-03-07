@@ -140,16 +140,8 @@ public class AdjacencyMatrix {
     }
 
     /*GETTERS*/
-    int getNumVertices() {
+    public int getNumVertices() {
         return adjMatrix.length;
     }
 
-    public int getVertices() {
-        return numberOfNodes;
-    }
-
-    /*SETTERS*/
-    void setEdge(int i, int j) {
-        adjMatrix[i][j] = true;
-    }
 }
