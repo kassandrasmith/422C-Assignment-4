@@ -30,12 +30,15 @@ public class A4Driver {
         Assignment4Interface wordLadderSolver = new WordLadderSolver(dictionary);
         try {
 
-           /*UNCOMMENT THESE LINES TO INPUT FROM A COMMAND LINE FILE*/
+           /*COMMENT THESE LINES TO INPUT FROM THE CODE*/
             /*START*/
             String[] inputStrings = fromWordsFile(args[1]);
             for (String pair: inputStrings
                  ) {
+
                 String[] checkPair = pair.split("[\\s]");
+
+                System.out.println("For the input words " +"\'" + checkPair[0] + "\'" + " and " + "\'" + checkPair[1]+"\'" +" the following word ladder was found:\n");
                 List<String> result = wordLadderSolver.computeLadder(checkPair[0], checkPair[1]);
                 for (String o :
                         result) {
@@ -43,13 +46,16 @@ public class A4Driver {
                 }
                 System.out.println("*********");
                 boolean correct = wordLadderSolver.validateResult(checkPair[0], checkPair[1], result);
-                if(!correct){System.out.println("HELP MEEEE");}
+                if(!correct){
+                    System.out.println("Something went wrong...");
+                }
                 result.clear();
             }
             /*END*/
-            /*COMMENT THESE LINES OUT TO INPUT FROM A COMMAND LINE FILE*/
-//            /*START*/
-//            List<String> result = wordLadderSolver.computeLadder("atlas", "zebra");
+            /*UNCOMMENT THESE LINES OUT TO INPUT FROM THE CODE (see Lisa's piazza answer @193) */
+            /*START*/
+//            System.out.println("For the input words " +"\'" + "money" + "\'" + " and " + "\'" + "honey" +"\'" +" the following word ladder was found:\n");
+//            List<String> result = wordLadderSolver.computeLadder("money", "honey");
 //            for (String o :
 //                    result) {
 //                System.out.println(o + "\n");

@@ -31,11 +31,13 @@ public class WordLadderSolver implements Assignment4Interface {
     @Override
     public List<String> computeLadder(String startWord, String endWord) throws NoSuchLadderException {
         finalLadder.clear();
-
-        if (startWord.length() != 5 | endWord.length() != 5) {
-            System.out.println("Error : Both words must be 5 letters long.");
+        try {
+            if (startWord.length() != 5 | endWord.length() != 5) {
+                throw new WordDoesNotExistException("Both words must be exactly 5 letters long");
+            }
+        } catch (WordDoesNotExistException e) {
+            System.out.println("Both words must be exactly 5 letters long");
             return ladder;
-
         }
 
         //check to see if the pair is the same word
@@ -51,10 +53,14 @@ public class WordLadderSolver implements Assignment4Interface {
         }
         //create an adjacency matrix
         AdjacencyMatrix wordGraph = new AdjacencyMatrix(dictionary.getWordSet());
-        if (dictionary.wordToIndex(startWord) == -1 || dictionary.wordToIndex(endWord) == -1) {
+        try {
+            if (dictionary.wordToIndex(startWord) == -1 || dictionary.wordToIndex(endWord) == -1) {
+                throw new WordDoesNotExistException("not a real word");
+            } else {
+                finalLadder = wordGraph.bfs(dictionary.wordToIndex(startWord), dictionary.wordToIndex(endWord));
+            }
+        } catch (WordDoesNotExistException e) {
             System.out.println("not a real word");
-        } else {
-            finalLadder = wordGraph.bfs(dictionary.wordToIndex(startWord), dictionary.wordToIndex(endWord));
         }
         try {
             if (finalLadder == null | finalLadder.size() == 1) {
