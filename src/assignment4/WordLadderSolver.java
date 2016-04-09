@@ -35,11 +35,13 @@ public class WordLadderSolver implements Assignment4Interface {
             if (startWord.length() != 5 | endWord.length() != 5) {
                 throw new WordDoesNotExistException("Both words must be exactly 5 letters long");
             }
+            if(dictionary.wordToIndex(startWord) == -1 || dictionary.wordToIndex(endWord) == -1){
+                throw new WordDoesNotExistException("Not a real word");
+            }
         } catch (WordDoesNotExistException e) {
-            System.out.println("Both words must be exactly 5 letters long");
+            System.out.println("Both words must be exactly 5 letters long and in the dictionary");
             return ladder;
         }
-
         //check to see if the pair is the same word
         if (startWord.equals(endWord)) {
             ladder.add(0, startWord);
