@@ -1,0 +1,8 @@
+<HTML> 
+<HEAD> 
+<TITLE>
+My First Java Applet
+</TITLE> 
+</HEAD> 
+<BODY> Here's my first Java Applet: <BR><BR>  
+<applet code="CarDrawer.class" width="300" height ="300">  </BODY> </HTML>
